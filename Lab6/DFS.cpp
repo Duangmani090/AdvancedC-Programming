@@ -1,23 +1,15 @@
 #include <iostream>
-#include <stack>
 #include <unordered_map>
 #include <vector>
 #include <string>
 
-// Function to perform DFS traversal starting from the source node
+// Recursive DFS function to traverse the graph
 void depthFirstPrint(std::unordered_map<std::string, std::vector<std::string>>& graph, const std::string& source) {
-    std::stack<std::string> stack;  // Initialize stack
-    stack.push(source);  // Push the source node to the stack
+    std::cout << source << std::endl;  // Print the current node
 
-    while (!stack.empty()) {  // Continue until the stack is empty
-        std::string current = stack.top();  // Get the top node from the stack
-        stack.pop();  // Remove the top node from the stack
-        std::cout << current << std::endl;  // Print the current node
-
-        // Traverse the adjacent nodes in reverse order
-        for (auto it = graph[current].rbegin(); it != graph[current].rend(); ++it) {
-            stack.push(*it);  // Push each adjacent node to the stack
-        }
+    // Traverse the adjacent nodes recursively
+    for (auto it = graph[source].begin(); it != graph[source].end(); ++it) {
+        depthFirstPrint(graph, *it);  // Recursive call to visit each neighbor
     }
 }
 
